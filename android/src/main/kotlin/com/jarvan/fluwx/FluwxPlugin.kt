@@ -325,11 +325,8 @@ class FluwxPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     private fun openUrl(call: MethodCall, result: Result) {
         val req = OpenWebview.Req()
         req.url = call.argument("url")
-        WXAPiHandler.wxApi?.sendReq(req, SendReqCallback {
-            result.success(it)
-        }) ?: kotlin.run {
-            result.success(false)
-        }
+        val done = WXAPiHandler.wxApi?.sendReq(req)
+        result.success(done)
     }
 
     private fun openRankList(result: Result) {
