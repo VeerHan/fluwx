@@ -324,7 +324,8 @@ class FluwxPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
 
     private fun openUrl(call: MethodCall, result: Result) {
         val req = OpenWebview.Req()
-        req.url = call.argument("url")
+        req.url = call.argument<String>("url")
+        println("==>>>>>>>>>>>>>> FLUWX Plugin open url: ${req.url}")
         val done = WXAPiHandler.wxApi?.sendReq(req)
         result.success(done)
     }
